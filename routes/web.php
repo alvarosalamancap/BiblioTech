@@ -1,5 +1,5 @@
 <?php
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
 // Ruta para mostrar el formulario de login
