@@ -13,7 +13,7 @@
 </head>
 <body>
     <form class="max-w-sm mx-auto" method="POST" action="{{ route('login') }}" novalidate>
-        @csrf <!-- Token de seguridad para formularios en Laravel -->
+    
         <!-- Imagen de logo -->
         <div class="mb-7 flex items-center justify-center">
             <a href="{{ route('loginForm') }}" class="flex items-center justify-center">
