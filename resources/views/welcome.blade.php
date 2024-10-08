@@ -20,7 +20,7 @@
 <body>
     <!-- Botón "Registrar" en la esquina superior derecha -->
     <div class="register-btn">
-        <a href="{{ route('register') }}" class="text-white bg-green-600 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-green-700 dark:hover:bg-green-600 dark:focus:ring-green-900">Registrar</a>
+        <a href="{{ url('/register') }}" class="text-white bg-green-600 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-green-700 dark:hover:bg-green-600 dark:focus:ring-green-900">Registrar</a>
     </div>
 
     <form class="max-w-sm mx-auto" method="POST" action="{{ route('login') }}" novalidate>
