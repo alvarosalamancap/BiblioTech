@@ -8,11 +8,11 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('loginForm'
 // Ruta para procesar el login
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-// Ruta para mostrar el formulario de registro (raíz)
-Route::get('/', [AuthController::class, 'registerForm']);
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
 
-// Ruta para mostrar el formulario de registro
-Route::get('register', [AuthController::class, 'registerForm'])->name('registerForm');
 
-// Ruta para procesar el registro
-Route::post('register', [AuthController::class, 'register'])->name('register');
+Route::get('/', function () {
+    return view('welcome');
+});
