@@ -6,7 +6,7 @@
     <title>Iniciar Sesión - Bibliotech</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
- 
+
 <body class="bg-[#618985] flex items-center justify-center h-screen">
     <div class="bg-[#96bbbb] shadow-lg rounded-lg p-8 w-96">
         <!-- Logo -->
@@ -36,8 +36,11 @@
 
             <!-- Botones -->
             <div class="flex justify-between items-center">
+                <!-- Botón Acceder -->
                 <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">Acceder</button>
-                <a href="{{ route('register') }}" class="text-teal-600 hover:text-teal-700">Registrar</a>
+
+                <!-- Botón Registrar (con color #c19875) -->
+                <a href="{{ route('register') }}" class="bg-[#c19875] text-white px-4 py-2 rounded-md hover:bg-[#a67c55]">Registrar</a>
             </div>
         </form>
     </div>
