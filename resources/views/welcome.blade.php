@@ -16,11 +16,8 @@
         <!-- Título -->
         <h1 class="text-white text-4xl font-bold mb-6">Bienvenido a Bibliotech</h1>
 
-        <!-- Botones -->
-        <div class="space-x-4">
-            <a href="{{ route('login') }}" class="bg-white text-[#618985] px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition duration-300 font-semibold">Iniciar Sesión</a>
-            <a href="{{ route('register') }}" class="bg-white text-[#618985] px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition duration-300 font-semibold">Regístrate</a>
-        </div>
+        <!-- Botón Adelante -->
+        <a href="{{ route('login') }}" class="bg-white text-[#618985] px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition duration-300 font-semibold">Adelante</a>
     </div>
 </body>
 </html>
