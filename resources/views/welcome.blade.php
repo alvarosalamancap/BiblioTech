@@ -69,7 +69,7 @@
     <div class="text-center">
         <!-- Logo -->
         <div class="mb-8">
-            <img src="{{ asset('images/bibliotech-logo1.png') }}" alt="Bibliotech Logo" class="mx-auto w-40 h-40">
+            <img src="https://i.ibb.co/q0SVKMQ/bibliotech-logo1.png" alt="Bibliotech Logo" class="mx-auto w-40 h-40">
         </div>
 
         <!-- Título -->
@@ -84,3 +84,4 @@
 >>>>>>> 7aaa0c94faaac99e63ee1b4927dbb040f1c24825
 </body>
 </html>
+
