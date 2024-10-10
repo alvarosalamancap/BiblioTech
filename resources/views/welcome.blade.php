@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Iniciar Sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
     <style>
@@ -60,5 +61,26 @@
             <p class="bg-red-500 text-white my-2 rounded-lg text-lg text-center p-2">{{ session('error') }}</p>
         @endif
     </form>
+=======
+    <title>Página de Inicio - Bibliotech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#618985] flex items-center justify-center h-screen">
+    <div class="text-center">
+        <!-- Logo -->
+        <div class="mb-8">
+            <img src="{{ asset('images/bibliotech-logo1.png') }}" alt="Bibliotech Logo" class="mx-auto w-40 h-40">
+        </div>
+
+        <!-- Título -->
+        <h1 class="text-white text-4xl font-bold mb-6">Bienvenido a Bibliotech</h1>
+
+        <!-- Botones -->
+        <div class="space-x-4">
+            <a href="{{ route('login') }}" class="bg-white text-[#618985] px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition duration-300 font-semibold">Iniciar Sesión</a>
+            <a href="{{ route('register') }}" class="bg-white text-[#618985] px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition duration-300 font-semibold">Regístrate</a>
+        </div>
+    </div>
+>>>>>>> 7aaa0c94faaac99e63ee1b4927dbb040f1c24825
 </body>
 </html>
