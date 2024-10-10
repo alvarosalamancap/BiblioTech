@@ -113,9 +113,9 @@ class AuthController extends Controller
 
         $credentials = $request->only('email', 'password');
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->route('index'); // Redirige a la vista 'dashboard'
         }
 
         return back()->withErrors([
