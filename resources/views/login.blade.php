@@ -37,10 +37,10 @@
             <!-- Botones -->
             <div class="flex justify-between items-center">
                 <!-- Botón Acceder -->
-                <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">Acceder</button>
+                <button type="submit" class="bg-[#c19875] text-white px-4 py-2 rounded-md hover:bg-[#a67c55]">Acceder</button>
 
-                <!-- Botón Registrar (con color #c19875) -->
-                <a href="{{ route('register') }}" class="bg-[#c19875] text-white px-4 py-2 rounded-md hover:bg-[#a67c55]">Registrar</a>
+                <!-- Botón Registrar -->
+                <a href="{{ route('register') }}" class="bg-white text-[#618985] px-4 py-2 rounded-md hover:bg-gray-200">Registrarse</a>
             </div>
         </form>
     </div>

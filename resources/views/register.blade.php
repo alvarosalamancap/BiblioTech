@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,14 @@
         body {
             background-color: #618985;
         }
+
         .box {
             background-color: #96BBBB;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .btn {
             width: 100%;
             padding: 0.625rem 1.25rem;
@@ -22,8 +25,9 @@
             font-weight: 500;
             text-align: center;
             border-radius: 0;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.3s ease;
         }
+
         .modal-bg {
             position: fixed;
             top: 0;
@@ -36,6 +40,7 @@
             align-items: center;
             backdrop-filter: blur(6px);
         }
+
         .modal {
             background: white;
             padding: 2rem;
@@ -43,14 +48,17 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .modal p {
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
         }
+
         .modal-buttons {
             display: flex;
             justify-content: space-around;
         }
+
         .confirm-btn {
             background-color: #4CAF50;
             color: white;
@@ -59,6 +67,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
         .cancel-btn {
             background-color: #F44336;
             color: white;
@@ -69,9 +78,10 @@
         }
     </style>
 </head>
+
 <body>
     <div class="max-w-sm mx-auto mt-10">
-        <!-- Cuadro para el formulario completo -->
+        <!-- Cuadro con el formulario de registro -->
         <div class="box">
             <!-- Logo -->
             <div class="flex justify-center mb-4">
@@ -79,18 +89,22 @@
             </div>
 
             <!-- Título -->
-            <h2 class="text-3xl font-semibold text-center mb-6">Regístrate</h2>
+            <h2 class="text-3xl font-semibold text-center mb-6">Registrarse</h2>
 
-            <!-- Mensajes de éxito -->
-            @if (session('success'))
+            <!-- Formulario de Registro -->
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
+
+                <!-- Mensajes de éxito -->
+                @if (session('success'))
                 <div class="mb-5">
                     <ul class="bg-green-500 text-white p-3 rounded">
                         <li>{{ session('success') }}</li>
                     </ul>
                 </div>
-            @endif
+                @endif
 
-            <!-- Mensajes de error -->
+                <!-- Mensajes de error -->
             @if ($errors->any())
                 <div class="mb-5">
                     <ul class="bg-red-500 text-white p-3 rounded">
@@ -114,33 +128,45 @@
                 <!-- Campo Nombre -->
                 <div class="mb-5">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nombre:</label>
-                    <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Ingrese su nombre"/>
+                    <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Ingrese su nombre" />
                 </div>
 
-                <!-- Campo Apellido -->
+                <!-- Campo Apellidos -->
                 <div class="mb-5">
                     <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900">Apellidos:</label>
-                    <input type="text" id="lastname" name="lastname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Ingrese sus apellidos"/>
+                    <input type="text" id="lastname" name="lastname" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Ingrese sus apellidos" />
                 </div>
 
-                <!-- Campo Correo Electrónico -->
+                <!-- Campo Email -->
                 <div class="mb-5">
                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900">Correo Electrónico:</label>
-                    <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Ingrese su correo"/>
+                    <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Ingrese su correo" />
                 </div>
 
                 <!-- Campo Teléfono -->
                 <div class="mb-5">
                     <label for="phone" class="block mb-2 text-sm font-medium text-gray-900">Teléfono:</label>
-                    <input type="text" id="phone" name="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Ingrese un número Telefónico (+56)"/>
+                    <input type="text" id="phone" name="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-none focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required placeholder="Ingrese un número telefónico (+56)" />
                 </div>
 
                 <!-- Botones -->
                 <div class="flex flex-col space-y-3">
-                    <button type="submit" class="btn text-white bg-blue-600 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300">Registrar</button>
+                    <!-- Botón Registrar -->
+                    <button type="button" class="btn text-white" 
+                        style="background-color: #c19875;" 
+                        onmouseover="this.style.backgroundColor='#a67c55'" 
+                        onmouseout="this.style.backgroundColor='#c19875'" 
+                        id="register-btn">
+                        Registrar
+                    </button>
 
-                    <!-- Botón de Volver -->
-                    <a href="{{ route('login') }}" class="btn text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300">Volver</a>
+                    <!-- Botón Volver -->
+                    <a href="{{ route('loginForm') }}" class="btn text-white" 
+                        style="background-color: #c19875;" 
+                        onmouseover="this.style.backgroundColor='#a67c55'" 
+                        onmouseout="this.style.backgroundColor='#c19875'">
+                        Volver
+                    </a>
                 </div>
             </form>
         </div>
@@ -158,21 +184,19 @@
     </div>
 
     <script>
-        // Mostrar la ventana emergente al hacer clic en el botón "Registrar"
-        document.getElementById('register-btn').addEventListener('click', function(event) {
-            event.preventDefault();  // Evita el envío inmediato del formulario
+        document.getElementById('register-btn').addEventListener('click', function (event) {
+            event.preventDefault();
             document.getElementById('modal').style.display = 'flex';
         });
 
-        // Cerrar la ventana emergente al hacer clic en "Cancelar"
-        document.getElementById('cancel-btn').addEventListener('click', function() {
+        document.getElementById('cancel-btn').addEventListener('click', function () {
             document.getElementById('modal').style.display = 'none';
         });
 
-        // Enviar el formulario al hacer clic en "Confirmar"
-        document.querySelector('.confirm-btn').addEventListener('click', function() {
+        document.querySelector('.confirm-btn').addEventListener('click', function () {
             document.querySelector('form').submit();
         });
     </script>
 </body>
+
 </html>

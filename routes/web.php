@@ -12,9 +12,10 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('loginForm'
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 // Ruta para mostrar el formulario de registro
-Route::get('/register', function () { return view('register'); })->name('register');
+Route::get('/register', [AuthController::class, 'registerForm'])->name('registerForm');
 
+// Ruta para mostrar la vista index
+Route::get('/index', function () { return view('index'); })->name('index');
 
-Route::get('/index', function () {
-    return view('index');
-})->name('index');
+// Ruta para procesar el registro
+Route::post('/register', [AuthController::class, 'register'])->name('register');
