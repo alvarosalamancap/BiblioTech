@@ -20,3 +20,8 @@ Route::get('/index', function () { return view('index'); })->name('index');
 
 // Ruta para procesar el registro
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/change-password', [PasswordChangeController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/change-password', [PasswordChangeController::class, 'changePassword'])->name('password.update');
+});
