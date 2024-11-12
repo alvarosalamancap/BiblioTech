@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PasswordChangeController;
 
 // Ruta para la página principal
 Route::get('/', function () { return view('welcome'); })->name('home');
