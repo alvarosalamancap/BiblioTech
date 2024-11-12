@@ -24,7 +24,7 @@
             font-size: 0.875rem;
             font-weight: 500;
             text-align: center;
-            border-radius: 0;
+            border-radius: 8px;  /* Redondea los botones */
             transition: background-color 0.3s ease;
         }
 
@@ -65,7 +65,7 @@
             padding: 0.5rem 1rem;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;  /* Redondea el botón de confirmación */
         }
 
         .cancel-btn {
@@ -74,7 +74,7 @@
             padding: 0.5rem 1rem;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;  /* Redondea el botón de cancelar */
         }
     </style>
 </head>
@@ -161,10 +161,10 @@
                     </button>
 
                     <!-- Botón Volver -->
-                    <a href="{{ route('loginForm') }}" class="btn text-white" 
-                        style="background-color: #c19875;" 
-                        onmouseover="this.style.backgroundColor='#a67c55'" 
-                        onmouseout="this.style.backgroundColor='#c19875'">
+                    <a href="{{ route('loginForm') }}" class="btn" 
+                        style="background-color: #618985; color: white;" 
+                        onmouseover="this.style.backgroundColor='#4f6b6b'" 
+                        onmouseout="this.style.backgroundColor='#618985'">
                         Volver
                     </a>
                 </div>
