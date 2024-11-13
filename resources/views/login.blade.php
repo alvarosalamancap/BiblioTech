@@ -23,14 +23,18 @@
                 <label for="email" class="block text-gray-700">Correo electrónico</label>
                 <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="nombre@dominio.com" value="{{ old('email') }}" required>
                 @error('email')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <div class="bg-red-500 text-white p-2 rounded mt-2">
+                        <span class="text-sm">{{ $message }}</span>
+                    </div>
                 @enderror
             </div>
             <div class="mb-6">
                 <label for="password" class="block text-gray-700">Contraseña</label>
                 <input type="password" name="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="********" required>
                 @error('password')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <div class="bg-red-500 text-white p-2 rounded mt-2">
+                        <span class="text-sm">{{ $message }}</span>
+                    </div>
                 @enderror
             </div>
 
@@ -46,3 +50,4 @@
     </div>
 </body>
 </html>
+
