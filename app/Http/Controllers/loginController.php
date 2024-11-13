@@ -9,7 +9,7 @@ class LoginController extends Controller
     // Mostrar el formulario de inicio de sesión
     public function showLoginForm()
     {
-        return view('auth.login'); // asegúrate de que esta vista exista en resources/views/auth/login.blade.php
+        return view('login'); // asegúrate de que esta vista exista en resources/views/auth/login.blade.php
     }
 
     // Procesar el login
