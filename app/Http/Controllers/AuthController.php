@@ -45,8 +45,8 @@ class AuthController extends Controller
             'phone.max' => 'El teléfono movil ingresado no es válido.',
             'phone.min' => 'El teléfono movil ingresado no es válido.',
             'phone.unique' => 'El número de teléfono ingresado ya está en uso.',
-            'name.min' => 'El nombre deben tener mas de 2 caracteres',
-            'lastname.min' => 'El nombre deben tener mas de 2 caracteres',
+            'name.min' => 'Los nombres y/o apellidos deben tener mas de 2 caracteres',
+            'lastname.min' => 'El nombres y/o apellidos deben tener mas de 2 caracteres',
             
         ];
 
