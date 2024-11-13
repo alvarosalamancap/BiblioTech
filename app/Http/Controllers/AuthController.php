@@ -36,17 +36,17 @@ class AuthController extends Controller
             'phone.required' => 'El campo teléfono es obligatorio.',
             'password.required' => 'El campo contraseña es obligatorio.',
             'email.email' => 'El correo electronico ingresado no es válido.',
-            'email.unique' => 'El correo ingresado ya está en uso.',
+            'email.unique' => 'El correo electrónico ya existe en el sistema. Intente iniciar sesión',
             'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
             'role.required' => 'Debe seleccionar un rol.',
-            'rut.regex' => 'El RUT es válido.',
-            'rut.unique' => 'El RUT ingresado ya está en uso.',
+            'rut.regex' => 'El RUT no es válido.',
+            'rut.unique' => 'El RUT ya existe en el sistema. Intente iniciar sesión',
             'phone.regex' => 'El teléfono movil ingresado no es válido.',
             'phone.max' => 'El teléfono movil ingresado no es válido.',
             'phone.min' => 'El teléfono movil ingresado no es válido.',
             'phone.unique' => 'El número de teléfono ingresado ya está en uso.',
-            'name.min' => 'El nombre deben tener mas de 2 caracteres',
-            'lastname.min' => 'El nombre deben tener mas de 2 caracteres',
+            'name.min' => 'Los nombres y/o apellidos deben tener mas de 2 caracteres',
+            'lastname.min' => 'El nombres y/o apellidos deben tener mas de 2 caracteres',
             
         ];
 
@@ -77,7 +77,7 @@ class AuthController extends Controller
                 'required',
                 'string',
                 'max:10',
-                'regex:/^\d{7,8}[0-9K]$/', // Valida el formato 11111111-1 o 1111111-K
+                'regex:/^\d{7,8}[0-9K]$/','unique:users', // Valida el formato 11111111-1 o 1111111-K
             ],
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -86,6 +86,10 @@ class AuthController extends Controller
         ], $messages);
 
         $rut = str_replace('-', '', $request->input('rut'));
+
+        if (User::where('rut', $request->input('rut'))->exists()) {
+            return back()->withErrors(['rut' => 'El RUT ya está registrado.'])->withInput();
+        }
 
         // Crear el usuario
         $user = new User();
