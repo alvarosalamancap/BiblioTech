@@ -21,7 +21,7 @@
             @csrf
             <div class="mb-4">
                 <label for="email" class="block text-gray-700">Correo electrónico</label>
-                <input type="text" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="nombre@dominio.com" value="{{ old('email') }}" required>
+                <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="nombre@dominio.com" value="{{ old('email') }}" required>
                 @error('email')
                     <div class="bg-red-500 text-white p-2 rounded mt-2">
                         <span class="text-sm">{{ $message }}</span>
@@ -50,3 +50,4 @@
     </div>
 </body>
 </html>
+
