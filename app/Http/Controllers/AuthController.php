@@ -45,8 +45,10 @@ class AuthController extends Controller
             'phone.max' => 'El teléfono movil ingresado no es válido.',
             'phone.min' => 'El teléfono movil ingresado no es válido.',
             'phone.unique' => 'El número de teléfono ingresado ya está en uso.',
-            'name.min' => 'Los nombres y/o apellidos deben tener mas de 2 caracteres',
-            'lastname.min' => 'El nombres y/o apellidos deben tener mas de 2 caracteres',
+            'name.min' => 'El nombre deben tener mas de 2 caracteres',
+            'lastname.min' => 'El apellido deben tener mas de 2 caracteres',
+
+            
             
         ];
 
@@ -79,8 +81,8 @@ class AuthController extends Controller
                 'max:10',
                 'regex:/^\d{7,8}[0-9K]$/','unique:users', // Valida el formato 11111111-1 o 1111111-K
             ],
-            'name' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'name' => 'required|string|max:255|min:2',
+            'lastname' => 'required|string|max:255|min:2',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|regex:/^\+56\d{9,12}$/',
         ], $messages);
