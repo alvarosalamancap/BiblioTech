@@ -24,7 +24,7 @@
             font-size: 0.875rem;
             font-weight: 500;
             text-align: center;
-            border-radius: 8px;  /* Redondea los botones */
+            border-radius: 8px;
             transition: background-color 0.3s ease;
         }
 
@@ -65,7 +65,7 @@
             padding: 0.5rem 1rem;
             border: none;
             cursor: pointer;
-            border-radius: 8px;  /* Redondea el botón de confirmación */
+            border-radius: 8px;
         }
 
         .cancel-btn {
@@ -74,7 +74,7 @@
             padding: 0.5rem 1rem;
             border: none;
             cursor: pointer;
-            border-radius: 8px;  /* Redondea el botón de cancelar */
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -89,7 +89,7 @@
             </div>
 
             <!-- Título -->
-            <h2 class="text-3xl font-semibold text-center mb-6">Registrarse</h2>
+            <h2 class="text-3xl font-bold text-center mb-6">Registrarse</h2>
 
             <!-- Formulario de Registro -->
             <form method="POST" action="{{ route('register') }}">

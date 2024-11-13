@@ -15,7 +15,7 @@
         </div>
 
         <!-- Formulario de Iniciar Sesión -->
-        <h2 class="text-2xl font-bold text-center mb-6">Iniciar Sesión</h2>
+        <h2 class="text-3xl font-bold text-center mb-6">Iniciar Sesión</h2>
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -50,4 +50,3 @@
     </div>
 </body>
 </html>
-
