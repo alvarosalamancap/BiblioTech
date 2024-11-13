@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function showLoginForm(){
-        try {
-            return view('login');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        return response()
+        ->view('login')
+        ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+        ->header('Pragma', 'no-cache')
+        ->header('Expires', '0');
     }
     
     public function registerForm(){
@@ -29,22 +29,24 @@ class AuthController extends Controller
     function makeMessagesRegister(){
     
         return [
-            'name.required' => 'Debe ingresar su nombre.',
-            'lastname.required' => 'Debe ingresar su apellido.',
-            'email.required' => 'Debe ingresar su correo electrónico.',
-            'email.email' => 'El campo correo debe ser un correo válido.',
+            'rut.required' => 'El campo RUT es obligatorio.',
+            'name.required' => 'El campo nombre es obligatorio.',
+            'lastname.required' => 'El campo apellido es obligatorio.',
+            'email.required' => 'El campo correo electrónico es obligatorio.',
+            'phone.required' => 'El campo teléfono es obligatorio.',
+            'password.required' => 'El campo contraseña es obligatorio.',
+            'email.email' => 'El correo electronico ingresado no es válido.',
             'email.unique' => 'El correo ingresado ya está en uso.',
-            'password.required' => 'Debe ingresar una contraseña.',
             'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
             'role.required' => 'Debe seleccionar un rol.',
-            'rut.required' => 'Debe ingresar su RUT.',
-            'rut.regex' => 'El RUT ingresado no es válido.',
+            'rut.regex' => 'El RUT es válido.',
             'rut.unique' => 'El RUT ingresado ya está en uso.',
-            'phone.required' => 'Debe ingresar su número de teléfono.',
-            'phone.regex' => 'El número de teléfono ingresado no es válido.',
-            'phone.max' => 'El número de teléfono ingresado no es válido.',
-            'phone.min' => 'El número de teléfono ingresado no es válido.',
+            'phone.regex' => 'El teléfono movil ingresado no es válido.',
+            'phone.max' => 'El teléfono movil ingresado no es válido.',
+            'phone.min' => 'El teléfono movil ingresado no es válido.',
             'phone.unique' => 'El número de teléfono ingresado ya está en uso.',
+            'name.min' => 'El nombre deben tener mas de 2 caracteres',
+            'lastname.min' => 'El nombre deben tener mas de 2 caracteres',
             
         ];
 
@@ -75,7 +77,7 @@ class AuthController extends Controller
                 'required',
                 'string',
                 'max:10',
-                'regex:/^\d{7,8}-[0-9K]$/', // Valida el formato 11111111-1 o 1111111-K
+                'regex:/^\d{7,8}[0-9K]$/', // Valida el formato 11111111-1 o 1111111-K
             ],
             'name' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
@@ -115,16 +117,20 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('index'); // Redirige a la vista 'dashboard'
+            $request->session()->regenerateToken(); // Regenerar el token CSRF
+            return redirect()->route('index'); 
         }
-
+    
         return back()->withErrors([
             'email' => 'Correo o contraseña incorrecta',
         ])->onlyInput('email');
 
+
         // Redirigir a la página de inicio de sesión con un mensaje de error
         // return redirect()->route('loginForm')->with('error', 'Credenciales incorrectas.');
     }
+
+    
 
 
 
