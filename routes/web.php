@@ -25,8 +25,3 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/change-password', [PasswordChangeController::class, 'showChangePasswordForm'])->name('password.change');
     Route::post('/change-password', [PasswordChangeController::class, 'changePassword'])->name('password.update');
 });
-
-// Si el usuario no está autenticado, redirigirlo a login
-Route::get('/login', function() {
-    return view('auth.login');
-});
