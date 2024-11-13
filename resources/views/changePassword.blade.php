@@ -17,25 +17,46 @@
         <!-- Formulario de Cambiar Contraseña -->
         <h2 class="text-2xl font-bold text-center mb-6">Cambiar Contraseña</h2>
 
-        <form onsubmit="return validateForm()">
+        @if(session('success'))
+            <div class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 text-center">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <form action="{{ route('password.update') }}" method="POST" onsubmit="return validateForm()">
+            @csrf <!-- Protege el formulario con CSRF token -->
+            
             <div class="mb-4">
                 <label for="email" class="block text-gray-700">Correo Electrónico</label>
-                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="tuemail@ejemplo.com" required>
+                <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="tuemail@ejemplo.com" required>
             </div>
+            
             <div class="mb-4">
                 <label for="current-password" class="block text-gray-700">Contraseña Actual</label>
-                <input type="password" id="current-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="********" required>
+                <input type="password" name="current_password" id="current-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="********" required>
             </div>
+            
             <div class="mb-4">
                 <label for="new-password" class="block text-gray-700">Nueva Contraseña</label>
-                <input type="password" id="new-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="********" required>
+                <input type="password" name="new_password" id="new-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="********" required>
             </div>
+            
             <div class="mb-6">
                 <label for="confirm-password" class="block text-gray-700">Confirmar Nueva Contraseña</label>
-                <input type="password" id="confirm-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="********" required>
+                <input type="password" name="new_password_confirmation" id="confirm-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="********" required>
             </div>
 
             <!-- Mensaje de error -->
+            @if ($errors->any())
+                <div class="bg-red-500 text-white px-4 py-2 rounded-md mb-4">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            
             <div id="error-message" class="hidden bg-red-500 text-white px-4 py-2 rounded-md mb-4">
                 Debe ingresar una contraseña válida.
             </div>
