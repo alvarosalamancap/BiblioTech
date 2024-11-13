@@ -39,7 +39,7 @@ class AuthController extends Controller
             'email.unique' => 'El correo ingresado ya está en uso.',
             'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
             'role.required' => 'Debe seleccionar un rol.',
-            'rut.regex' => 'El RUT es válido.',
+            'rut.regex' => 'El RUT no es válido.',
             'rut.unique' => 'El RUT ingresado ya está en uso.',
             'phone.regex' => 'El teléfono movil ingresado no es válido.',
             'phone.max' => 'El teléfono movil ingresado no es válido.',
