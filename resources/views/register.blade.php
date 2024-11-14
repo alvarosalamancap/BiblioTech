@@ -128,7 +128,7 @@
             <h2 class="text-3xl font-bold text-center mb-6">Registrarse</h2>
 
             <!-- Formulario de Registro -->
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" id="register-form">
                 @csrf
 
                 <!-- Mensajes de éxito -->
@@ -204,13 +204,16 @@
         </div>
     </div>
 
-<!-- Modal de confirmación -->
-<div class="modal-bg" id="modal">
-    <div class="modal">
-        <p>¿Estás seguro de que deseas registrarte?</p>
-        <div class="modal-buttons">
-            <button class="confirm-btn" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">Confirmar</button>
-            <button class="cancel-btn" id="cancel-btn" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">Cancelar</button>
+    <!-- Modal de confirmación -->
+    <div class="modal-bg" id="modal">
+        <div class="modal">
+            <p>¿Estás seguro de que deseas registrarte?</p>
+            <div class="modal-buttons">
+                <button class="confirm-btn" id="confirm-btn">Confirmar</button>
+                <button class="cancel-btn" id="cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
 
 <<<<<<< HEAD
 <script>
@@ -230,12 +233,28 @@
     @endif
 >>>>>>> 0a0de88c0d4e8101d194b34d0b2ed0d459745b64
 
+<<<<<<< HEAD
     document.getElementById('cancel-btn').addEventListener('click', function () {
         document.getElementById('modal').style.display = 'none';
     });
+=======
+    <script>
+        // Mostrar el modal de confirmación al hacer clic en "Registrar"
+        document.getElementById('register-btn').addEventListener('click', function (event) {
+            event.preventDefault();
+            document.getElementById('modal').style.display = 'flex';
+        });
 
-        document.querySelector('.confirm-btn').addEventListener('click', function () {
-            document.querySelector('form').submit();
+        // Ocultar el modal de confirmación al hacer clic en "Cancelar"
+        document.getElementById('cancel-btn').addEventListener('click', function () {
+            document.getElementById('modal').style.display = 'none';
+        });
+>>>>>>> 943bce6d682b5d0e1aeb8e04cf78754b6bb75270
+
+        // Enviar el formulario cuando se confirma en el modal
+        document.getElementById('confirm-btn').addEventListener('click', function () {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('register-form').submit();
         });
 <<<<<<< HEAD
     </script>
