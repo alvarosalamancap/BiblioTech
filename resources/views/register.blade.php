@@ -77,40 +77,25 @@
             border-radius: 8px;
         }
 
-        /* Modal de éxito */
-        .modal-success {
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-bg-success {
+        /* Modal para el mensaje de éxito */
+        .success-modal {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.6);
-            display: none;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(6px);
         }
 
-        .modal-success p {
-            font-size: 1.2rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .ok-btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 0.5rem 1rem;
-            border: none;
-            cursor: pointer;
+        .success-modal-content {
+            background-color: white;
+            padding: 2rem;
             border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
     </style>
 </head>
@@ -128,7 +113,7 @@
             <h2 class="text-3xl font-bold text-center mb-6">Registrarse</h2>
 
             <!-- Formulario de Registro -->
-            <form method="POST" action="{{ route('register') }}" id="register-form">
+            <form method="POST" action="{{ route('register') }}">
                 @csrf
 
                 <!-- Mensajes de éxito -->
@@ -145,7 +130,7 @@
                 <div class="mb-5">
                     <ul class="bg-red-500 text-white p-3 rounded">
                         @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                        <li>{{ $error }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -183,7 +168,6 @@
 
                 <!-- Botones -->
                 <div class="flex flex-col space-y-3">
-                    <!-- Botón Registrar -->
                     <button type="button" class="btn text-white" 
                         style="background-color: #c19875;" 
                         onmouseover="this.style.backgroundColor='#a67c55'" 
@@ -191,14 +175,6 @@
                         id="register-btn">
                         Registrar
                     </button>
-
-                    <!-- Botón Volver -->
-                    <a href="{{ route('loginForm') }}" class="btn" 
-                        style="background-color: #618985; color: white;" 
-                        onmouseover="this.style.backgroundColor='#4f6b6b'" 
-                        onmouseout="this.style.backgroundColor='#618985'">
-                        Volver
-                    </a>
                 </div>
             </form>
         </div>
@@ -209,47 +185,48 @@
         <div class="modal">
             <p>¿Estás seguro de que deseas registrarte?</p>
             <div class="modal-buttons">
-                <button class="confirm-btn" id="confirm-btn">Confirmar</button>
+                <button class="confirm-btn">Confirmar</button>
                 <button class="cancel-btn" id="cancel-btn">Cancelar</button>
             </div>
         </div>
     </div>
 
     <!-- Modal de éxito -->
-    @if (session('success'))
-    <div class="modal-bg-success" id="success-modal">
-        <div class="modal-success">
+    <div class="success-modal" id="success-modal">
+        <div class="success-modal-content">
             <p>Registro exitoso</p>
-            <button class="ok-btn" id="ok-btn">Aceptar</button>
+            <button onclick="closeSuccessModal()">Aceptar</button>
         </div>
     </div>
-    @endif
 
     <script>
-        // Mostrar el modal de confirmación al hacer clic en "Registrar"
+        // Mostrar modal de confirmación
         document.getElementById('register-btn').addEventListener('click', function (event) {
             event.preventDefault();
             document.getElementById('modal').style.display = 'flex';
         });
 
-        // Ocultar el modal de confirmación al hacer clic en "Cancelar"
+        // Cerrar modal de confirmación
         document.getElementById('cancel-btn').addEventListener('click', function () {
             document.getElementById('modal').style.display = 'none';
         });
 
-        // Enviar el formulario cuando se confirma en el modal
-        document.getElementById('confirm-btn').addEventListener('click', function () {
-            document.getElementById('modal').style.display = 'none';
-            document.getElementById('register-form').submit();
+        // Confirmar registro
+        document.querySelector('.confirm-btn').addEventListener('click', function () {
+            document.querySelector('form').submit();
         });
 
-        // Mostrar el modal de éxito si el registro fue exitoso
-        @if (session('success'))
-            document.getElementById('success-modal').style.display = 'flex';
-            document.getElementById('ok-btn').addEventListener('click', function () {
-                document.getElementById('success-modal').style.display = 'none';
-            });
-        @endif
+        // Cerrar modal de éxito
+        function closeSuccessModal() {
+            document.getElementById('success-modal').style.display = 'none';
+        }
+
+        // Mostrar el modal de éxito si hay un mensaje de éxito en la sesión
+        window.onload = function() {
+            @if (session('success'))
+                document.getElementById('success-modal').style.display = 'flex';
+            @endif
+        }
     </script>
 </body>
 
