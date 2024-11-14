@@ -101,7 +101,7 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->password = bcrypt($rut);
         $user->phone = $request->input('phone');
-        $user->role = 'user'; // Ajusta según tu lógica
+        $user->role = 'user';
         $user->register_date = now();
         $user->save();
 
@@ -123,21 +123,14 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            $request->session()->regenerateToken(); // Regenerar el token CSRF
+            $request->session()->regenerateToken();
             return redirect()->route('index'); 
         }
     
         return back()->withErrors([
-            'email' => 'Correo o contraseña incorrecta',
+            'email' => 'Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema',
         ])->onlyInput('email');
-
-
-        // Redirigir a la página de inicio de sesión con un mensaje de error
-        // return redirect()->route('loginForm')->with('error', 'Credenciales incorrectas.');
     }
 
     
-
-
-
 }

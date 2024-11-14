@@ -171,32 +171,30 @@
             </form>
         </div>
     </div>
-
-    <!-- Modal de confirmación -->
-    <div class="modal-bg" id="modal">
-        <div class="modal">
-            <p>¿Estás seguro de que deseas registrarte?</p>
-            <div class="modal-buttons">
-                <button class="confirm-btn">Confirmar</button>
-                <button class="cancel-btn" id="cancel-btn">Cancelar</button>
-            </div>
+<!-- Modal de confirmación -->
+<div class="modal-bg" id="modal">
+    <div class="modal">
+        <p>¿Estás seguro de que deseas registrarte?</p>
+        <div class="modal-buttons">
+            <button class="confirm-btn" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">Confirmar</button>
+            <button class="cancel-btn" id="cancel-btn" style="background-color: #f44336; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer;">Cancelar</button>
         </div>
     </div>
+</div>
 
-    <script>
-        document.getElementById('register-btn').addEventListener('click', function (event) {
-            event.preventDefault();
-            document.getElementById('modal').style.display = 'flex';
-        });
+<script>
+    document.getElementById('register-btn').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.getElementById('modal').style.display = 'flex';
+    });
 
-        document.getElementById('cancel-btn').addEventListener('click', function () {
-            document.getElementById('modal').style.display = 'none';
-        });
+    document.getElementById('cancel-btn').addEventListener('click', function () {
+        document.getElementById('modal').style.display = 'none';
+    });
 
-        document.querySelector('.confirm-btn').addEventListener('click', function () {
-            document.querySelector('form').submit();
-        });
-    </script>
+    document.querySelector('.confirm-btn').addEventListener('click', function () {
+        document.querySelector('form').submit();
+    });
+</script>
 </body>
-
 </html>
