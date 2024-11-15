@@ -49,4 +49,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    // Método para verificar si el usuario es cliente
+    public function isClient()
+    {
+        return $this->role === 'cliente';
+    }
 }

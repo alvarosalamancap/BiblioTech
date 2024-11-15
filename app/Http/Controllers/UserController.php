@@ -6,26 +6,50 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class UserController extends Controller
 {
-    
-    
-    public function loginForm(){
-        return response()
-        ->view('login')
-        ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
-        ->header('Pragma', 'no-cache')
-        ->header('Expires', '0');
+    public function index()
+    {
+        return view('admin.indexAdmin');
+        
     }
+
+    public function registerUserForm()
+    {
+        return view('register');
+    }
+
     
-    public function registerForm(){
-        try {
-            // Muestra la vista del formulario de registro
-            return view("register");
-        } catch (\Exception $e) {
-            // En caso de excepción, redirige a la página anterior con un mensaje de error
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+    public function create()
+    {
+        
+    }
+
+    public function store(Request $request)
+    {
+        
+    }
+
+    public function show(string $id)
+    {
+        
+    }
+
+    public function edit(string $id)
+    {
+        
+    }
+
+    //Se actualiza el estado del sorteador respectivo.
+    //Benjamín Rivera, 02-06-2024.
+    public function update(Request $request, string $id)
+    {
+ 
+    }
+
+    public function destroy(string $id)
+    {
+        
     }
 
     function makeMessagesRegister(){
@@ -38,19 +62,17 @@ class AuthController extends Controller
             'phone.required' => 'El campo teléfono es obligatorio.',
             'password.required' => 'El campo contraseña es obligatorio.',
             'email.email' => 'El correo electronico ingresado no es válido.',
-            'email.unique' => 'El correo electrónico ya existe en el sistema. Intente iniciar sesión',
+            'email.unique' => 'El correo ingresado ya está en uso.',
             'password.min' => 'La contraseña debe tener al menos 6 caracteres.',
             'role.required' => 'Debe seleccionar un rol.',
             'rut.regex' => 'El RUT no es válido.',
-            'rut.unique' => 'El RUT ya existe en el sistema. Intente iniciar sesión',
+            'rut.unique' => 'El RUT ingresado ya está en uso.',
             'phone.regex' => 'El teléfono movil ingresado no es válido.',
             'phone.max' => 'El teléfono movil ingresado no es válido.',
             'phone.min' => 'El teléfono movil ingresado no es válido.',
             'phone.unique' => 'El número de teléfono ingresado ya está en uso.',
             'name.min' => 'El nombre deben tener mas de 2 caracteres',
-            'lastname.min' => 'El apellido deben tener mas de 2 caracteres',
-
-            
+            'lastname.min' => 'El nombre deben tener mas de 2 caracteres',
             
         ];
 
@@ -69,10 +91,9 @@ class AuthController extends Controller
     
         return $messages;
     }
-    
-    public function register(Request $request)
-    {
 
+    //Método register llamado desde la vista.
+    public function register(Request $request){
         $messages = $this->makeMessagesRegister();
 
         // Validar la solicitud
@@ -81,19 +102,16 @@ class AuthController extends Controller
                 'required',
                 'string',
                 'max:10',
-                'regex:/^\d{7,8}[0-9K]$/','unique:users', // Valida el formato 11111111-1 o 1111111-K
+                'regex:/^\d{7,8}[0-9K]$/', // Valida el formato 11111111-1 o 1111111-K
             ],
-            'name' => 'required|string|max:255|min:2',
-            'lastname' => 'required|string|max:255|min:2',
+            'name' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|regex:/^\+56\d{9,11}$/',
+            'role' => 'required|string|in:admin,cliente,trabajador', // Asegura que sea un rol permitido
         ], $messages);
 
         $rut = str_replace('-', '', $request->input('rut'));
-
-        if (User::where('rut', $request->input('rut'))->exists()) {
-            return back()->withErrors(['rut' => 'El RUT ya está registrado.'])->withInput();
-        }
 
         // Crear el usuario
         $user = new User();
@@ -103,67 +121,23 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->password = bcrypt($rut);
         $user->phone = $request->input('phone');
-<<<<<<< HEAD
-        $user->role = 'user';
-=======
-        $user->role = 'client'; // Ajusta según tu lógica
->>>>>>> b3c8785db30d59d73f32dc8d9d374f172ed7354e
+        $user->role = $request->input('role');; // Ajusta según tu lógica
         $user->register_date = now();
         $user->save();
 
-        
-        
-    
-
         // Redirigir a la página de inicio de sesión o cualquier otra página
         return redirect()->route('loginForm')->with('success', 'Registro exitoso. Puedes iniciar sesión.');
+
     }
 
-    public function login(Request $request)
-    {
+    public function validateData(){
 
-        $messages = $this->makeMessages();
-        // Validar la solicitud
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ], $messages);
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            $request->session()->regenerateToken();
-            return redirect()->route('index'); 
-
-
-        }
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-    
-            $user = Auth::user();
-    
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
-    
-            // Redirigir según el rol del usuario (cliente en este caso)
-            return redirect()->route('client.dashboard');
-        }
-    
-        return back()->withErrors([
-            'email' => 'Las credenciales de acceso son incorrectas o el usuario no está registrado en el sistema',
-        ])->onlyInput('email');
     }
 
-    public function logout(){
-        
+    public function updateData(Request $request){
+
 
 
     }
 
-    
-
-    
 }

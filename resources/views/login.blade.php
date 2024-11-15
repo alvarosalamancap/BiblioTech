@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Bibliotech</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Verificar rol desde la variable inyectada por Blade
+        document.addEventListener('DOMContentLoaded', function () {
+            const role = "{{ $role ?? '' }}"; // Blade inyecta el rol del usuario
+            
+            if (role === 'admin') {
+                window.location.href = '/admin/index'; // Redirige al panel del administrador
+            } else if (role === 'client') {
+                window.location.href = '/index'; // Redirige al dashboard del cliente
+            }
+            // Otros roles pueden manejarse aquí si es necesario
+        });
+    </script>
 </head>
 
 <body class="bg-[#618985] flex items-center justify-center h-screen">
@@ -50,4 +63,3 @@
     </div>
 </body>
 </html>
-
