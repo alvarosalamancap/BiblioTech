@@ -14,7 +14,7 @@ class PasswordChangeController extends Controller
      */
     public function showChangePasswordForm()
     {
-        return view('auth.change-password');
+        return view('change-password');
     }
 
     /**
@@ -50,7 +50,8 @@ class PasswordChangeController extends Controller
         // Actualización de la nueva contraseña
         $user->password = Hash::make($request->new_password);
         $user->save();
-
+ 
         return redirect()->route('password.change')->with('success', '¡Contraseña actualizada con éxito!');
     }
+    
 }

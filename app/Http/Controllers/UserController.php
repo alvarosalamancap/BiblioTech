@@ -6,26 +6,50 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class UserController extends Controller
 {
-    
-    
-    public function loginForm(){
-        return response()
-        ->view('login')
-        ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
-        ->header('Pragma', 'no-cache')
-        ->header('Expires', '0');
+    public function index()
+    {
+        return view('admin.indexAdmin');
+        
     }
+
+    public function registerUserForm()
+    {
+        return view('register');
+    }
+
     
-    public function registerForm(){
-        try {
-            // Muestra la vista del formulario de registro
-            return view("register");
-        } catch (\Exception $e) {
-            // En caso de excepción, redirige a la página anterior con un mensaje de error
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+    public function create()
+    {
+        
+    }
+
+    public function store(Request $request)
+    {
+        
+    }
+
+    public function show(string $id)
+    {
+        
+    }
+
+    public function edit(string $id)
+    {
+        
+    }
+
+    //Se actualiza el estado del sorteador respectivo.
+    //Benjamín Rivera, 02-06-2024.
+    public function update(Request $request, string $id)
+    {
+ 
+    }
+
+    public function destroy(string $id)
+    {
+        
     }
 
     function makeMessagesRegister(){
@@ -67,10 +91,9 @@ class AuthController extends Controller
     
         return $messages;
     }
-    
-    public function register(Request $request)
-    {
 
+    //Método register llamado desde la vista.
+    public function register(Request $request){
         $messages = $this->makeMessagesRegister();
 
         // Validar la solicitud
@@ -85,6 +108,7 @@ class AuthController extends Controller
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|regex:/^\+56\d{9,11}$/',
+            'role' => 'required|string|in:admin,cliente,trabajador', // Asegura que sea un rol permitido
         ], $messages);
 
         $rut = str_replace('-', '', $request->input('rut'));
@@ -97,70 +121,23 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->password = bcrypt($rut);
         $user->phone = $request->input('phone');
-        $user->role = 'client'; // Ajusta según tu lógica
+        $user->role = $request->input('role');; // Ajusta según tu lógica
         $user->register_date = now();
         $user->save();
 
-        
-        
-    
-
         // Redirigir a la página de inicio de sesión o cualquier otra página
         return redirect()->route('loginForm')->with('success', 'Registro exitoso. Puedes iniciar sesión.');
-    }
-
-    public function login(Request $request)
-    {
-
-        $messages = $this->makeMessages();
-        // Validar la solicitud
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ], $messages);
-
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            $request->session()->regenerateToken(); // Regenerar el token CSRF
-            return redirect()->route('index'); 
-
-
-        }
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-    
-            $user = Auth::user();
-    
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
-    
-            // Redirigir según el rol del usuario (cliente en este caso)
-            return redirect()->route('client.dashboard');
-        }
-    
-        return back()->withErrors([
-            'email' => 'Correo o contraseña incorrecta',
-        ])->onlyInput('email');
-
-
-        // Redirigir a la página de inicio de sesión con un mensaje de error
-        // return redirect()->route('loginForm')->with('error', 'Credenciales incorrectas.');
-    }
-
-    public function logout(){
-        
-
 
     }
 
-    
+    public function validateData(){
 
-    
+    }
+
+    public function updateData(Request $request){
 
 
+
+    }
 
 }

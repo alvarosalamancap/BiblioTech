@@ -8,7 +8,9 @@
 </head>
 <body class="bg-[#618985] flex items-center justify-center h-screen relative">
     <!-- Botón de Cambiar Contraseña -->
-    <a href="{{ route('password.change') }}" class="btn btn-primary">Cambiar Contraseña</a>
+    <button class="absolute top-4 right-4 bg-[#96bbbb] text-white px-6 py-2 rounded-full shadow-lg hover:bg-[#7ea6a6]">
+        Cambiar Contraseña
+    </button>
 
     <div class="text-center">
         <!-- Logo -->
