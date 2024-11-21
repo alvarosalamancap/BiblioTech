@@ -2,12 +2,13 @@ version: "3.9"
 
 services:
   pignus_db:
-    container_name: ingsoftdb
+    container_name: bibliotech
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ingsoftdb
+      MYSQL_DATABASE: bibliotech
       MYSQL_DEFAULT_AUTHENTICATION_PLUGIN: caching_sha2_password
     restart: always
     ports:
       - "3306:3306"
+

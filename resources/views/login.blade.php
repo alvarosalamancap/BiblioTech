@@ -5,8 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Bibliotech</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Verificar rol desde la variable inyectada por Blade
+        document.addEventListener('DOMContentLoaded', function () {
+            const role = "{{ $role ?? '' }}"; // Blade inyecta el rol del usuario
+            
+            if (role === 'admin') {
+                window.location.href = '/admin/index'; // Redirige al panel del administrador
+            } else if (role === 'client') {
+                window.location.href = '/index'; // Redirige al dashboard del cliente
+            }
+            // Otros roles pueden manejarse aquí si es necesario
+        });
+    </script>
 </head>
- 
+
 <body class="bg-[#618985] flex items-center justify-center h-screen">
     <div class="bg-[#96bbbb] shadow-lg rounded-lg p-8 w-96">
         <!-- Logo -->
@@ -15,7 +28,7 @@
         </div>
 
         <!-- Formulario de Iniciar Sesión -->
-        <h2 class="text-2xl font-bold text-center mb-6">Iniciar Sesión</h2>
+        <h2 class="text-3xl font-bold text-center mb-6">Iniciar Sesión</h2>
 
         <form method="POST" action="{{ route('login') }}">
             @csrf
@@ -23,21 +36,28 @@
                 <label for="email" class="block text-gray-700">Correo electrónico</label>
                 <input type="email" name="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="nombre@dominio.com" value="{{ old('email') }}" required>
                 @error('email')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <div class="bg-red-500 text-white p-2 rounded mt-2">
+                        <span class="text-sm">{{ $message }}</span>
+                    </div>
                 @enderror
             </div>
             <div class="mb-6">
                 <label for="password" class="block text-gray-700">Contraseña</label>
                 <input type="password" name="password" id="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="********" required>
                 @error('password')
-                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                    <div class="bg-red-500 text-white p-2 rounded mt-2">
+                        <span class="text-sm">{{ $message }}</span>
+                    </div>
                 @enderror
             </div>
 
             <!-- Botones -->
             <div class="flex justify-between items-center">
-                <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700">Acceder</button>
-                <a href="{{ route('register') }}" class="text-teal-600 hover:text-teal-700">Registrar</a>
+                <!-- Botón Acceder -->
+                <button type="submit" class="bg-[#c19875] text-white px-4 py-2 rounded-md hover:bg-[#a67c55]">Acceder</button>
+
+                <!-- Botón Registrar -->
+                <a href="{{ route('register') }}" class="bg-white text-[#618985] px-4 py-2 rounded-md hover:bg-gray-200">Registrarse</a>
             </div>
         </form>
     </div>

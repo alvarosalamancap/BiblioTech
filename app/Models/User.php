@@ -18,8 +18,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'lastname',
         'email',
         'password',
+        'role',
+        'rut',
+        'phone',
+        'register_date'
     ];
 
     /**
@@ -43,5 +48,16 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    // Método para verificar si el usuario es cliente
+    public function isClient()
+    {
+        return $this->role === 'cliente';
     }
 }
